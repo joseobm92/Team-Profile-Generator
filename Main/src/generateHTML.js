@@ -1,4 +1,5 @@
-function generateHTML(teamMembers) {
+// function to generate html 
+function generateHTML(myTeam) {
     cards = [];
     let footer = `</div>
    </div>
@@ -6,31 +7,28 @@ function generateHTML(teamMembers) {
 </body>
 
 </html>`
-
-    for (i = 0; i < teamMembers.length; i++) {
-        if (teamMembers[i].getRole() === "Manager") {
-           const managerCard = generateManagerCard(teamMembers[i]);
+//for loop thru myteam to generate cards for different roles and push to cards array
+    for (i = 0; i < myTeam.length; i++) {
+        if (myTeam[i].getRole() === "Manager") {
+           const managerCard = createManagerCard(myTeam[i]);
            cards.push(managerCard);
         } 
-        if (teamMembers[i].getRole() === "Engineer") {
-            const engineerCard =  generateEngineerCard(teamMembers[i]);
+        if (myTeam[i].getRole() === "Engineer") {
+            const engineerCard =  createEngineerCard(myTeam[i]);
             cards.push(engineerCard);
         } 
-        if (teamMembers[i].getRole() === "Intern") {
-            const internCard = generateInternCard(teamMembers[i]);
+        if (myTeam[i].getRole() === "Intern") {
+            const internCard = createInternCard(myTeam[i]);
             cards.push(internCard);
         }
     }
-
-    console.log(cards);
-    console.log(cards.length);
-
+//joining cards as a string and assigning it to a variable
     employeeCards = cards.join(" ");
-
+//return string of cards and footer
     return employeeCards + footer
 }
-
-function generateManagerCard(manager) {
+//function to create a Manager card depending on for loop
+function createManagerCard(manager) {
    
     return `<!DOCTYPE html>
     <html lang="en">
@@ -68,9 +66,9 @@ function generateManagerCard(manager) {
     
 }
 
-
-function generateEngineerCard(engineer) {
-    console.log(engineer.name, engineer.id, engineer.email, engineer.github);
+//function to create an Engineer card depending on for loop
+function createEngineerCard(engineer) {
+    
     return `<div class="card mt-3 mb-3 bg-info shadow-lg p-3" style="width: 18rem;">
     <div class="card-body">
         <h5 class="card-title text-capitalize">${engineer.name}</h5>
@@ -84,7 +82,8 @@ function generateEngineerCard(engineer) {
 </div>`
 }
 
-function generateInternCard(intern) {
+//function to create an Intern card depending on for loop
+function createInternCard(intern) {
     
     return `<div class="card mt-3 mb-3 bg-info shadow-lg p-3" style="width: 18rem;">
     <div class="card-body">
@@ -99,5 +98,5 @@ function generateInternCard(intern) {
 </div>`
 }
 
-
+//export module to be accesed somewhere else
 module.exports = generateHTML;

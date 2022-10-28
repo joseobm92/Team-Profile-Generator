@@ -1,5 +1,5 @@
 const Employee = require('./Employee')
-
+//Intern extends Employee class
 class Intern extends Employee {
 
     constructor(name, id, email, school) {

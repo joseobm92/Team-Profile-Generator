@@ -184,14 +184,14 @@ const internQuestions = [
 ]
 
 //array created to store different type of employees
-const teamMembers = []
+const myTeam = []
 
 // function to start prompt questions for interns
 function internInit() {
     inquirer.prompt(internQuestions).then((data) => {
         const intern = new Intern(data.internName, data.internId, data.internEmail, data.school)
         
-        teamMembers.push(intern)
+        myTeam.push(intern)
        
 
         if(data.member === 'Engineer') {
@@ -202,7 +202,7 @@ function internInit() {
             internInit()
            }
            else {
-            writeToFile(teamMembers)
+            writeToFile(myTeam)
            }
            
      });
@@ -213,7 +213,7 @@ function engineerInit() {
     inquirer.prompt(engineerQuestions).then((data) => {
         const engineer = new Engineer(data.engineerName, data.engineerId, data.engineerEmail, data.engineerGithub)
         
-        teamMembers.push(engineer)
+        myTeam.push(engineer)
         
 
         if(data.member === 'Engineer') {
@@ -224,7 +224,7 @@ function engineerInit() {
             internInit()
            }
            else {
-            writeToFile(teamMembers)
+            writeToFile(myTeam)
            }
      });
 };
@@ -234,7 +234,7 @@ function writeToFile (data) {
     console.log(data);
 
 
-    fs.writeFile('./dist/index.html', generateHTML(teamMembers), (err) => {
+    fs.writeFile('./dist/index.html', generateHTML(myTeam), (err) => {
         err ? console.log(err) : console.log('Succesfully generated HTML file')
     })
 }
@@ -245,7 +245,7 @@ function managerInit() {
     inquirer.prompt(managerQuestions).then((data) => {
        const manager = new Manager(data.managerName, data.managerId, data.managerEmail, data.officeNumber)
        
-       teamMembers.push(manager)
+       myTeam.push(manager)
        
 //filter if they choose they want to add an engineer or Intern
        if(data.member === 'Engineer') {
@@ -256,7 +256,7 @@ function managerInit() {
         internInit()
        }
        else {
-        writeToFile(teamMembers) 
+        writeToFile(myTeam) 
        }
        
     });
