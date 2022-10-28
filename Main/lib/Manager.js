@@ -1,10 +1,11 @@
 const Employee = require('./Employee')
 
+//Manager extends Employee Class
 class Manager extends Employee {
 
     constructor(name, id, email, officeNumber) {
-        super(name, id, email);
-        this.officeNumber = officeNumber;
+        super(name, id, email); // inherit this from Employee Class
+        this.officeNumber = officeNumber; // officeNumber is exclusive to Managers (extends)
     }
 
     getRole(){
@@ -15,5 +16,5 @@ class Manager extends Employee {
         return this.officeNumber;
     }
 }
-
+// export module to be used in other files
 module.exports = Manager;

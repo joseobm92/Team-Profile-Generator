@@ -19,5 +19,5 @@ class Employee {
         return "Employee"
     }
 }
-
+// export module to be used in other files
 module.exports = Employee;

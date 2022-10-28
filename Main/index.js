@@ -1,3 +1,4 @@
+// requiring neccesary modulus
 const fs = require('fs');
 const inquirer = require('inquirer');
 const Manager = require('../Main/lib/Manager')
@@ -6,8 +7,8 @@ const Engineer = require('../Main/lib/Engineer');
 const Intern = require('../Main/lib/Intern');
 const generateHTML = require('./src/generateHTML')
 
-
-const mgrQuestions = [
+// Manager Questions for prompts
+const managerQuestions = [
     {
         type: 'input',
         name: 'managerName',
@@ -66,7 +67,8 @@ const mgrQuestions = [
 
 ]
 
-const engQuestions = [
+//Engineer Questions for prompt
+const engineerQuestions = [
     {
         type: 'input',
         name: 'engineerName',
@@ -123,7 +125,8 @@ const engQuestions = [
 
 ]
 
-const intQuestions = [
+// Intern Questions for prompt
+const internQuestions = [
     {
         type: 'input',
         name: 'internName',
@@ -180,10 +183,12 @@ const intQuestions = [
 
 ]
 
+//array created to store different type of employees
 const teamMembers = []
 
+// function to start prompt questions for interns
 function internInit() {
-    inquirer.prompt(intQuestions).then((data) => {
+    inquirer.prompt(internQuestions).then((data) => {
         const intern = new Intern(data.internName, data.internId, data.internEmail, data.school)
         
         teamMembers.push(intern)
@@ -203,8 +208,9 @@ function internInit() {
      });
 };
 
+// function to start prompt for engineer questions
 function engineerInit() {
-    inquirer.prompt(engQuestions).then((data) => {
+    inquirer.prompt(engineerQuestions).then((data) => {
         const engineer = new Engineer(data.engineerName, data.engineerId, data.engineerEmail, data.engineerGithub)
         
         teamMembers.push(engineer)
@@ -223,6 +229,7 @@ function engineerInit() {
      });
 };
 
+// functions using fs to initialize the generateHTML routing it to the dist folder
 function writeToFile (data) {
     console.log(data);
 
@@ -232,14 +239,15 @@ function writeToFile (data) {
     })
 }
 
+//functions that initialize the whole process with manager questions prompt
 function managerInit() {
 
-    inquirer.prompt(mgrQuestions).then((data) => {
+    inquirer.prompt(managerQuestions).then((data) => {
        const manager = new Manager(data.managerName, data.managerId, data.managerEmail, data.officeNumber)
        
        teamMembers.push(manager)
        
-
+//filter if they choose they want to add an engineer or Intern
        if(data.member === 'Engineer') {
         engineerInit()
        }
@@ -248,7 +256,7 @@ function managerInit() {
         internInit()
        }
        else {
-        writeToFile(teamMembers)
+        writeToFile(teamMembers) 
        }
        
     });
