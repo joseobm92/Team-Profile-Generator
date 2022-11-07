@@ -1,10 +1,10 @@
 // requiring neccesary modulus
 const fs = require('fs');
 const inquirer = require('inquirer');
-const Manager = require('../Main/lib/Manager')
-const Employee = require('../Main/lib/Employee')
-const Engineer = require('../Main/lib/Engineer');
-const Intern = require('../Main/lib/Intern');
+const Manager = require('./lib/Manager')
+const Employee = require('./lib/Employee')
+const Engineer = require('./lib/Engineer');
+const Intern = require('./lib/Intern');
 const generateHTML = require('./src/generateHTML')
 
 // Manager Questions for prompts
